@@ -1,0 +1,5 @@
+project:
+  name: learning-airflow
+
+postgres:
+  port: 5435
