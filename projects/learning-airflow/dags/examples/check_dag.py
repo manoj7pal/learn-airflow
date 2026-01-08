@@ -1,6 +1,6 @@
 from airflow.sdk import DAG, task
 
-from pendulum import datetime
+from pendulum import datetime, duration
 
 default_args = {
     'retries': 3
@@ -9,11 +9,12 @@ default_args = {
 with DAG(
     dag_id = 'check_dag',
     description = 'DAG to check data',
-    schedule = '@daily', # everyday at midnight
+    schedule = '@daily', # everyday at midnight # duration(month=2, days=1, hours=13, minutes=30, seconds=30 ) 
     start_date = datetime(2025, 1, 1),
     tags = ['data_engineering'],
-    max_consecutive_failed_dag_runs=3,
-    default_args = default_args
+    max_consecutive_failed_dag_runs = 3,
+    default_args = default_args,
+    catchup = False
 ):
     
     @task.bash
